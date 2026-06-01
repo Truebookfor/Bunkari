@@ -1,0 +1,288 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
+
+  /* Light theme palette (R G B) */
+  --c-cream: 255 255 255;
+  --c-sand: 255 255 255;
+  --c-terracotta: 192 107 78;
+  --c-terracotta-dark: 164 84 59;
+  --c-terracotta-light: 216 145 119;
+  --c-sage: 138 154 130;
+  --c-sage-dark: 110 126 102;
+  --c-sage-light: 169 182 162;
+  --c-mustard: 212 162 78;
+  --c-mustard-dark: 185 134 58;
+  --c-cocoa: 62 47 38;
+  --c-cocoa-light: 92 70 58;
+}
+
+html.dark {
+  /* Night theme — soft feminine plum sky */
+  --c-cream: 26 20 33;
+  --c-sand: 40 30 52;
+  --c-terracotta: 226 142 112;
+  --c-terracotta-dark: 205 118 90;
+  --c-terracotta-light: 236 172 148;
+  --c-sage: 162 182 152;
+  --c-sage-dark: 140 162 130;
+  --c-sage-light: 184 200 174;
+  --c-mustard: 228 184 104;
+  --c-mustard-dark: 206 160 84;
+  --c-cocoa: 240 230 236;
+  --c-cocoa-light: 206 192 202;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(var(--c-cream));
+  color: rgb(var(--c-cocoa));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .heading-serif {
+    @apply font-serif font-medium tracking-tight text-cocoa;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta/40 disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply btn bg-terracotta text-cream shadow-soft hover:bg-terracotta-dark hover:shadow-lift;
+  }
+
+  .btn-outline {
+    @apply btn border border-cocoa/20 bg-transparent text-cocoa hover:border-cocoa/40 hover:bg-cocoa/5;
+  }
+
+  .btn-whatsapp {
+    @apply btn bg-[#25D366] text-white shadow-soft hover:bg-[#1ebe5d] hover:shadow-lift;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium;
+  }
+
+  .btn-dark {
+    @apply btn bg-cocoa text-cream shadow-soft hover:bg-cocoa-light hover:shadow-lift;
+  }
+
+  /* Store-grade utilities */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .badge-sale {
+    @apply inline-flex items-center rounded-full bg-terracotta px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-cream shadow-sm;
+  }
+
+  .badge-soft {
+    @apply inline-flex items-center rounded-full bg-cream/95 px-2.5 py-1 text-[11px] font-semibold text-cocoa shadow-sm backdrop-blur;
+  }
+
+  .icon-btn {
+    @apply flex h-9 w-9 items-center justify-center rounded-full bg-cream/95 text-cocoa shadow-card backdrop-blur transition-all duration-200 hover:bg-terracotta hover:text-cream;
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta;
+  }
+}
+
+@layer utilities {
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+    mask-image: linear-gradient(to right, #000 88%, transparent);
+  }
+}
+
+/* ---------- Starry night sky (dark mode only) ---------- */
+.night-sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  background: radial-gradient(
+      120% 80% at 50% -10%,
+      rgba(78, 52, 92, 0.55) 0%,
+      transparent 60%
+    );
+}
+html.dark .night-sky {
+  opacity: 1;
+}
+.night-sky .star {
+  position: absolute;
+  border-radius: 9999px;
+  background: #fff7e6;
+  box-shadow: 0 0 6px 1px rgba(255, 247, 230, 0.7);
+  animation: twinkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+.night-sky .moon {
+  position: absolute;
+  top: 6%;
+  right: 8%;
+  height: 70px;
+  width: 70px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #fdf6e3, #e9d8a6 70%, #d9c178);
+  box-shadow: 0 0 50px 12px rgba(253, 246, 227, 0.35);
+}
+.night-sky .shooting {
+  position: absolute;
+  top: 18%;
+  left: 70%;
+  height: 2px;
+  width: 90px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), transparent);
+  border-radius: 9999px;
+  animation: shoot 7s ease-in-out infinite;
+}
+
+/* ---------- Ambient floating background (petals + bokeh + grain) ---------- */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient .bokeh {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(26px);
+  opacity: 0.1;
+  background: rgb(var(--c-terracotta-light));
+  animation: bokeh-float var(--dur, 26s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+html.dark .ambient .bokeh {
+  opacity: 0.18;
+}
+.ambient .petal {
+  position: absolute;
+  top: 100%;
+  opacity: 0.45;
+  animation: petal-rise var(--dur, 24s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+html.dark .ambient .petal {
+  opacity: 0.3;
+}
+.ambient .petal svg {
+  display: block;
+  animation: petal-spin var(--spin, 7s) ease-in-out infinite;
+}
+.ambient .grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html.dark .ambient .grain {
+  mix-blend-mode: screen;
+  opacity: 0.04;
+}
+
+@keyframes petal-rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--max-op, 0.45);
+  }
+  90% {
+    opacity: var(--max-op, 0.45);
+  }
+  100% {
+    transform: translateY(-115vh) translateX(var(--drift, 40px));
+    opacity: 0;
+  }
+}
+@keyframes petal-spin {
+  0%,
+  100% {
+    transform: rotate(-25deg);
+  }
+  50% {
+    transform: rotate(25deg);
+  }
+}
+@keyframes bokeh-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(var(--bx, 30px), var(--by, -40px)) scale(1.15);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ambient,
+  .night-sky .shooting {
+    display: none;
+  }
+  .night-sky .star,
+  .vine-leaf {
+    animation: none !important;
+  }
+}
+
+/* ---------- Climbing vine (feminine accent) ---------- */
+.vine-leaf {
+  fill: rgb(var(--c-sage));
+  transform-origin: bottom center;
+  animation: sway 6s ease-in-out infinite;
+}
+.vine-flower {
+  fill: rgb(var(--c-terracotta-light));
+}
+.vine-stem {
+  fill: none;
+  stroke: rgb(var(--c-sage-dark));
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+/* Thin, elegant scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--c-sand));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-terracotta-light));
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--c-terracotta));
+}
