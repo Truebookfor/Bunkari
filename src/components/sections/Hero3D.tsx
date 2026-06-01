@@ -1,16 +1,14 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { config } from "@/config";
 import { Hero } from "@/components/sections/Hero";
 
 /* ─── Seamless Looping Video ─────────────────────────────────────────────────
-   Two identical video elements crossfade at the loop boundary.
-   - videoA plays normally
-   - When videoA is near the end (last 0.4s), videoB starts from 0 and fades in
-   - This hides any loop "jump" cut
+   Single video element with loop — simpler, less memory, faster load.
+   Uses IntersectionObserver to only load when visible.
    ────────────────────────────────────────────────────────────────────────── */
 function SeamlessVideo({
   src,
@@ -24,60 +22,32 @@ function SeamlessVideo({
   blend?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoARef = useRef<HTMLVideoElement>(null);
-  const videoBRef = useRef<HTMLVideoElement>(null);
-  const crossfading = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleTimeUpdate = useCallback(() => {
-    const vA = videoARef.current;
-    const vB = videoBRef.current;
-    if (!vA || !vB) return;
-
-    const remaining = vA.duration - vA.currentTime;
-    // Start crossfade 0.4s before end
-    if (remaining <= 0.4 && !crossfading.current) {
-      crossfading.current = true;
-      vB.currentTime = 0;
-      vB.play().catch(() => {});
-      vB.style.opacity = "1";
-      vA.style.opacity = "0";
-    }
-  }, []);
-
-  const handleEndedB = useCallback(() => {
-    const vA = videoARef.current;
-    const vB = videoBRef.current;
-    if (!vA || !vB) return;
-    // Swap: A starts fresh, B hides
-    vA.currentTime = 0;
-    vA.play().catch(() => {});
-    vA.style.opacity = "1";
-    vB.style.opacity = "0";
-    crossfading.current = false;
-  }, []);
-
-  // Fallback: if videoA ends naturally, swap
-  const handleEndedA = useCallback(() => {
-    const vA = videoARef.current;
-    const vB = videoBRef.current;
-    if (!vA || !vB) return;
-    if (!crossfading.current) {
-      vB.currentTime = 0;
-      vB.play().catch(() => {});
-      vB.style.opacity = "1";
-      vA.style.opacity = "0";
-    }
-    crossfading.current = false;
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const vA = videoARef.current;
-    if (vA) {
-      vA.play().catch(() => {});
+    if (isVisible && videoRef.current) {
+      videoRef.current.play().catch(() => {});
     }
-  }, []);
+  }, [isVisible]);
 
-  const videoClasses = `absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-in-out ${videoClassName}`;
+  const videoClasses = `absolute inset-0 h-full w-full object-cover ${videoClassName}`;
 
   return (
     <div
@@ -85,25 +55,17 @@ function SeamlessVideo({
       className={`relative overflow-hidden ${className}`}
       style={blend ? { mixBlendMode: "multiply" } : undefined}
     >
-      <video
-        ref={videoARef}
-        src={src}
-        muted
-        playsInline
-        onTimeUpdate={handleTimeUpdate}
-        onEnded={handleEndedA}
-        className={videoClasses}
-        style={{ opacity: 1 }}
-      />
-      <video
-        ref={videoBRef}
-        src={src}
-        muted
-        playsInline
-        onEnded={handleEndedB}
-        className={videoClasses}
-        style={{ opacity: 0 }}
-      />
+      {isVisible && (
+        <video
+          ref={videoRef}
+          src={src}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className={videoClasses}
+        />
+      )}
     </div>
   );
 }

@@ -10,26 +10,42 @@ import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { SearchProvider } from "@/context/SearchContext";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { CartDrawer } from "@/components/cart/CartDrawer";
-import { BottomNav } from "@/components/BottomNav";
-import { SearchOverlay } from "@/components/SearchOverlay";
-import StarryNight from "@/components/StarryNight";
-import AmbientBackground from "@/components/AmbientBackground";
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/JsonLd";
+import dynamic from "next/dynamic";
+
+const CartDrawer = dynamic(
+  () => import("@/components/cart/CartDrawer").then((m) => m.CartDrawer),
+  { ssr: false }
+);
+const BottomNav = dynamic(
+  () => import("@/components/BottomNav").then((m) => m.BottomNav),
+  { ssr: false }
+);
+const SearchOverlay = dynamic(
+  () => import("@/components/SearchOverlay").then((m) => m.SearchOverlay),
+  { ssr: false }
+);
+const StarryNight = dynamic(() => import("@/components/StarryNight"), {
+  ssr: false,
+});
+const AmbientBackground = dynamic(
+  () => import("@/components/AmbientBackground"),
+  { ssr: false }
+);
 
 // Runs before paint to apply the saved theme and avoid a flash of the wrong mode.
 const themeScript = `(function(){try{var t=localStorage.getItem('crochet-theme');if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
 
 const serif = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
   variable: "--font-serif",
   display: "swap",
 });
 
 const sans = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600"],
   variable: "--font-sans",
   display: "swap",
 });

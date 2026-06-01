@@ -44,7 +44,7 @@ export function BottomNav() {
           <span className="relative">
             <Heart className="h-[21px] w-[21px]" />
             {wishCount > 0 && (
-              <span className="absolute -right-2 -top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-terracotta px-0.5 text-[8px] font-bold text-cream">
+              <span className="absolute -right-2 -top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-terracotta px-0.5 text-[8px] font-semibold text-cream">
                 {wishCount}
               </span>
             )}
@@ -56,7 +56,7 @@ export function BottomNav() {
           <span className="relative">
             <ShoppingBag className="h-[21px] w-[21px]" />
             {cartCount > 0 && (
-              <span className="absolute -right-2 -top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-terracotta px-0.5 text-[8px] font-bold text-cream">
+              <span className="absolute -right-2 -top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-terracotta px-0.5 text-[8px] font-semibold text-cream">
                 {cartCount}
               </span>
             )}

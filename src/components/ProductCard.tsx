@@ -136,7 +136,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.shortDescription}
         </p>
         <div className="mt-3 flex items-center gap-2">
-          <span className="text-lg font-bold text-cocoa">
+          <span className="text-lg font-semibold text-cocoa">
             {formatPrice(product.price)}
           </span>
           {product.oldPrice && (
