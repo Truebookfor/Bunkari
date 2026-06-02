@@ -106,13 +106,13 @@ export function ShopClient({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search…"
-              className="w-full rounded-full border border-cocoa/15 bg-white py-2.5 pl-9 pr-4 text-sm text-cocoa outline-none transition-colors focus:border-terracotta"
+              className="w-full rounded-full border border-cocoa/15 bg-sand py-2.5 pl-9 pr-4 text-sm text-cocoa outline-none transition-colors focus:border-terracotta"
             />
           </div>
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
-            className="rounded-full border border-cocoa/15 bg-white px-4 py-2.5 text-sm text-cocoa outline-none transition-colors focus:border-terracotta"
+            className="rounded-full border border-cocoa/15 bg-sand px-4 py-2.5 text-sm text-cocoa outline-none transition-colors focus:border-terracotta"
           >
             <option value="featured">Featured</option>
             <option value="price-low">Price: Low to High</option>

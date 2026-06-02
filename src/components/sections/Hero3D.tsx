@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useCallback, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { config } from "@/config";

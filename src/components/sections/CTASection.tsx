@@ -24,7 +24,7 @@ export function CTASection() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn bg-cream text-cocoa hover:bg-white"
+              className="btn bg-cream text-cocoa hover:bg-sand"
             >
               <MessageCircle className="h-4 w-4" />
               WhatsApp par order karo

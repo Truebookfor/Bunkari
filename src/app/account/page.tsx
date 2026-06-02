@@ -75,7 +75,7 @@ export default function AccountPage() {
             <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-cocoa/40">
               {section.title}
             </p>
-            <div className="overflow-hidden rounded-2xl bg-white shadow-card">
+            <div className="overflow-hidden rounded-2xl bg-sand shadow-card">
               {section.items.map((item, i) => {
                 const Icon = item.icon;
                 const cls =

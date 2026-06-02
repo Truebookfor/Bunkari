@@ -36,7 +36,7 @@ export default function ContactPage() {
             href={whatsappLink(`Hi ${config.brandName}! Mujhe ek sawaal hai.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group rounded-4xl bg-white p-8 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
+            className="group rounded-4xl bg-sand p-8 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
           >
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366]">
               <MessageCircle className="h-6 w-6" />
@@ -54,7 +54,7 @@ export default function ContactPage() {
 
           <a
             href={`mailto:${config.email}`}
-            className="group rounded-4xl bg-white p-8 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
+            className="group rounded-4xl bg-sand p-8 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
           >
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-terracotta/10 text-terracotta">
               <Mail className="h-6 w-6" />
@@ -74,7 +74,7 @@ export default function ContactPage() {
             href={config.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="group rounded-4xl bg-white p-8 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
+            className="group rounded-4xl bg-sand p-8 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
           >
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-terracotta/10 text-terracotta">
               <Instagram className="h-6 w-6" />
@@ -125,7 +125,7 @@ export default function ContactPage() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn mt-7 bg-cream text-cocoa hover:bg-white"
+            className="btn mt-7 bg-cream text-cocoa hover:bg-sand"
           >
             <MessageCircle className="h-4 w-4" />
             Custom order shuru karo

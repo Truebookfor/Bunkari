@@ -37,6 +37,9 @@ const config: Config = {
         soft: "0 10px 40px -12px rgba(62, 47, 38, 0.18)",
         lift: "0 22px 60px -18px rgba(62, 47, 38, 0.28)",
         card: "0 2px 14px -6px rgba(62, 47, 38, 0.12)",
+        "soft-dark": "0 10px 40px -12px rgba(0, 0, 0, 0.45)",
+        "lift-dark": "0 22px 60px -18px rgba(0, 0, 0, 0.55)",
+        "card-dark": "0 2px 14px -6px rgba(0, 0, 0, 0.35)",
       },
       borderRadius: {
         "4xl": "2rem",

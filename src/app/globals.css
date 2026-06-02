@@ -116,6 +116,23 @@ body {
   }
 }
 
+/* ---------- Dark mode shadow + card border overrides ---------- */
+html.dark .shadow-card {
+  --tw-shadow: 0 2px 14px -6px rgba(0, 0, 0, 0.35);
+  --tw-shadow-colored: 0 2px 14px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+html.dark .shadow-soft {
+  --tw-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.45);
+  --tw-shadow-colored: 0 10px 40px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+html.dark .shadow-lift {
+  --tw-shadow: 0 22px 60px -18px rgba(0, 0, 0, 0.55);
+  --tw-shadow-colored: 0 22px 60px -18px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 /* ---------- Starry night sky (dark mode only) ---------- */
 .night-sky {
   position: fixed;

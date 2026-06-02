@@ -106,7 +106,7 @@ export default function AboutPage() {
             {values.map((v) => (
               <div
                 key={v.title}
-                className="rounded-4xl bg-white p-7 shadow-soft"
+                className="rounded-4xl bg-sand p-7 shadow-soft"
               >
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-terracotta/10 text-terracotta">
                   <v.icon className="h-6 w-6" />
@@ -157,7 +157,7 @@ export default function AboutPage() {
             Jab aap kuch khareedte ho, toh ek family ko support karte ho aur
             apne ghar ek handmade khushi laate ho.
           </p>
-          <Link href="/shop" className="btn bg-cream text-cocoa hover:bg-white mt-8">
+          <Link href="/shop" className="btn bg-cream text-cocoa hover:bg-sand mt-8">
             Collection dekho
             <ArrowRight className="h-4 w-4" />
           </Link>
